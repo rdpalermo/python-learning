@@ -1,0 +1,178 @@
+# Unit 1 ######################################################
+# Beginner ####################################################
+# Create RGB tuple
+rgb_color = (255, 128, 0)
+
+# Print each color
+print(rgb_color[0])  # Red
+print(rgb_color[1])  # Green
+print(rgb_color[2])  # Blue
+
+# Create palette list and add tuple
+palette = []
+palette.append(rgb_color)
+
+# Print palette
+print(palette)
+
+# Intermediate ################################################
+# Create student tuples
+student1 = ("Alice", 90, 18)
+student2 = ("Bob", 85, 17)
+student3 = ("Charlie", 92, 18)
+
+# Store in list
+classroom = [student1, student2, student3]
+
+# Print second student's name
+print(classroom[1][0])
+
+# Unpack first student
+name, grade, age = classroom[0]
+
+# Print formatted message
+print(f"{name} is {age} years old and has a grade of {grade}.")
+
+# Advanced ###################################################
+# Original tuple
+student = ("Alice", [85, 90, 78], 0)
+
+# Add fourth exam score
+student[1].append(88)
+
+# Calculate average
+avg = sum(student[1]) / len(student[1])
+
+# Create new tuple (since tuples are immutable)
+updated_student = (student[0], student[1], avg)
+
+# Print both
+print("Original:", student)
+print("Updated:", updated_student)
+
+# Unit 2 ####################################################
+# Beginner ##################################################
+# Grades list
+grades = [85, 90, 78]
+
+# Date tuple
+today = (4, 16, 2026)
+
+# Function to boost grades
+def boost_grades(grades):
+    for i in range(len(grades)):
+        grades[i] += 5
+
+# Call function
+boost_grades(grades)
+
+# Print result
+print(grades)
+
+# Intermediate ############################################
+def find_range(*args):
+    return (min(args), max(args))
+
+# Test with 3 numbers
+print(find_range(3, 7, 1))
+
+# Test with 7 numbers
+print(find_range(5, 10, 2, 8, 6, 1, 9))
+
+# Using unpacking
+test_scores = [78, 92, 85, 88, 91]
+print(find_range(*test_scores))
+
+# Advanced ###############################################
+# Function 1
+def calculate_statistics(*args):
+    count = len(args)
+    total = sum(args)
+    avg = total / count if count > 0 else 0
+    return (count, total, avg)
+
+# Function 2
+def update_student_records(records, bonus):
+    new_records = []
+    for name, grade in records:
+        new_records.append((name, grade + bonus))
+    return new_records
+
+# Test data
+students = [("Alice", 85), ("Bob", 90), ("Charlie", 78)]
+
+# Update grades
+updated = update_student_records(students, 5)
+
+# Use statistics
+grades = [grade for _, grade in updated]
+stats = calculate_statistics(*grades)
+
+print("Updated Records:", updated)
+print("Statistics (count, sum, avg):", stats)
+
+# Unit 3 ###############################################
+# Beginner #############################################
+# Create grid
+grid = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9]
+]
+
+# Print grid
+print(grid)
+
+# Print center value
+print(grid[1][1])
+
+# Print rows using loops
+for row in grid:
+    print(row)
+
+# Intermediate ########################################
+scores = [45, 78, 92, 61, 88, 73, 55, 90, 82]
+
+# Passing grades
+passing_grades = [x for x in scores if x >= 60]
+
+# Letter grades
+letter_grades = [
+    'A' if x >= 90 else
+    'B' if x >= 80 else
+    'C' if x >= 70 else
+    'D'
+    for x in passing_grades
+]
+
+print(passing_grades)
+print(letter_grades)
+
+# Advanced ###########################################
+# 4x4 multiplication table
+table = [[i * j for j in range(1, 5)] for i in range(1, 5)]
+
+# Print table
+for row in table:
+    print(row)
+
+# Function to sum diagonal
+def sum_diagonal(matrix):
+    total = 0
+    for i in range(len(matrix)):
+        total += matrix[i][i]
+    return total
+
+# Test function
+print("Diagonal Sum:", sum_diagonal(table))
+
+# Generator for even numbers
+even_gen = (num for row in table for num in row if num % 2 == 0)
+
+# Print first 5 values
+count = 0
+for num in even_gen:
+    print(num)
+    count += 1
+    if count == 5:
+        break
