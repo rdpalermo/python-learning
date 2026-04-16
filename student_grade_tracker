@@ -1,0 +1,140 @@
+"""
+Student Grade Tracker Program
+"""
+
+
+def is_valid_score(score):
+    """Check if a score is between 0 and 100."""
+    return 0 <= score <= 100
+
+
+def get_validated_score(prompt):
+    """Prompt the user until a valid score is entered."""
+    while True:
+        try:
+            score = int(input(prompt))
+            if is_valid_score(score):
+                return score
+            else:
+                print("Score must be between 0 and 100.")
+        except ValueError:
+            print("Please enter a valid number.")
+
+
+def print_divider():
+    """Print a divider line for formatting."""
+    print("=" * 30)
+
+
+def get_student_name():
+    """Get the student's name from user input."""
+    return input("Student name: ")
+
+
+def get_exam_scores(num_exams):
+    """Collect a list of exam scores from the user."""
+    scores = []
+    for i in range(num_exams):
+        score = get_validated_score(f"Exam {i+1} score: ")
+        scores.append(score)
+    return scores
+
+
+def calculate_average(scores):
+    """Calculate the average of the scores."""
+    if len(scores) == 0:
+        return 0
+    return sum(scores) / len(scores)
+
+
+def determine_letter_grade(avg):
+    """Determine the letter grade from the average score."""
+    if avg >= 90:
+        return "A"
+    elif avg >= 80:
+        return "B"
+    elif avg >= 70:
+        return "C"
+    elif avg >= 60:
+        return "D"
+    else:
+        return "F"
+
+
+def determine_standing(avg):
+    """Determine academic standing based on the average."""
+    if avg >= 90:
+        return "Dean's List"
+    elif avg >= 70:
+        return "Good Standing"
+    elif avg >= 60:
+        return "Academic Probation"
+    else:
+        return "Academic Warning"
+
+
+def display_report(name, scores, avg, grade, standing):
+    """Display the formatted student grade report."""
+    print_divider()
+    print("STUDENT GRADE REPORT")
+    print_divider()
+    print(f"Student: {name}")
+
+    for i, score in enumerate(scores, 1):
+        print(f"  Exam {i}: {score}")
+
+    print("-" * 30)
+    print(f"Average:  {avg:.2f}")
+    print(f"Grade:    {grade}")
+    print(f"Standing: {standing}")
+    print_divider()
+
+
+def grade_tracker():
+    """Run the full grade tracker program."""
+    name = get_student_name()
+    scores = get_exam_scores(3)
+
+    avg = calculate_average(scores)
+    grade = determine_letter_grade(avg)
+    standing = determine_standing(avg)
+
+    display_report(name, scores, avg, grade, standing)
+
+
+def test_grade_tracker():
+    """Test the grade tracker calculation functions."""
+    print("Running tests...")
+
+    if calculate_average([90, 80, 70]) == 80:
+        print("Average test PASS")
+    else:
+        print("Average test FAIL")
+
+    if determine_letter_grade(85) == "B":
+        print("Grade test PASS")
+    else:
+        print("Grade test FAIL")
+
+    if determine_standing(95) == "Dean's List":
+        print("Standing test PASS")
+    else:
+        print("Standing test FAIL")
+
+
+def main():
+    """Display menu and run the selected option."""
+    print("1. Run Grade Tracker")
+    print("2. Run Tests")
+
+    choice = input("Choose an option: ")
+
+    if choice == "1":
+        grade_tracker()
+    elif choice == "2":
+        test_grade_tracker()
+    else:
+        print("Invalid choice")
+
+
+main()
